@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 // Axios default config
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+axios.defaults.baseURL = 'http://localhost:5000/api/auth';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
         try {
             console.log('🔍 Checking authentication...');
-            const { data } = await axios.get('/auth/me');
+            const { data } = await axios.get('/me');
             if (data.success) {
                 setUser(data.user);
                 console.log('✅ User authenticated:', data.user.email);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
         try {
             setError(null);
             console.log('📝 Signup attempt:', email);
-            const { data } = await axios.post('/auth/signup', { name, email, password });
+            const { data } = await axios.post('/signup', { name, email, password });
             if (data.success) {
                 setUser(data.user);
                 console.log('✅ Signup successful:', data.user.email);
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
         try {
             setError(null);
             console.log('🔐 Login attempt:', email);
-            const { data } = await axios.post('/auth/login', { email, password });
+            const { data } = await axios.post('/login', { email, password });
             if (data.success) {
                 setUser(data.user);
                 console.log('✅ Login successful:', data.user.email);
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         try {
             console.log('🚪 Logging out...');
-            await axios.post('/auth/logout');
+            await axios.post('/logout');
             setUser(null);
             console.log('✅ Logout successful');
         } catch (error) {
