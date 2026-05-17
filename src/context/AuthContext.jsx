@@ -3,9 +3,7 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
-// Axios default config
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:5000/api/auth';
+
 
 export const useAuth = () => useContext(AuthContext);
 
