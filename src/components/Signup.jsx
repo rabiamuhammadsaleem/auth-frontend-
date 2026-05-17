@@ -12,6 +12,12 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+         const res = await api.post('/signup',{
+            name,
+            email,
+            password
+         });
+         console.log('Signup response:', res);
         setError('');
         
         const result = await signup(name, email, password);
