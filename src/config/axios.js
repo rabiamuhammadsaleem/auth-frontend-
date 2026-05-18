@@ -3,7 +3,7 @@ import axios from 'axios';
 // Dynamic URL based on environment
 const API_URL = import.meta.env.VITE_API_URL === 'development' 
     ? 'http://localhost:5000/api/auth' 
-    : 'https://auth-backend-green.vercel.app/api/auth';
+    : 'https://auth-backend-production-736f.up.railway.app/api/auth';
 
 const api = axios.create({
     baseURL: API_URL,
